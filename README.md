@@ -1,16 +1,87 @@
-# React + Vite
+# SmallBiz Page Generator – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the **SmallBiz Page Generator** project.
 
-Currently, two official plugins are available:
+The application allows users to enter details about a small business (such as name, description, and services) and generates a simple landing page based on that information.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The frontend communicates with a backend API to process the form submission and return the structured page data.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- JavaScript
+- CSS
+- Fetch API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Features
+
+- Form for entering business information
+- Sends user input to the backend
+- Displays a generated landing page using the submitted data
+- Simple and clean user interface
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/otieno602/smallbiz-page-generator-frontend.git
+```
+
+### 2. Navigate into the project directory
+
+```bash
+cd smallbiz-page-generator-frontend
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm start
+```
+
+The app will run at:
+
+```
+http://localhost:5173
+```
+
+---
+
+## Backend Connection
+
+The frontend communicates with the backend server running at:
+
+```
+http://localhost:5000
+```
+
+Make sure the backend server is running before submitting the form.
+
+---
+
+## Future Improvements
+
+- Improve UI styling
+- Add form validation
+- Add loading states
+- Improve error handling
+- Deploy the application
+
+---
+
+## Author
+
+Otieno
