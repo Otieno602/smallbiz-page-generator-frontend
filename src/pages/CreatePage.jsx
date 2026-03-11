@@ -12,6 +12,8 @@ const CreatePage = () => {
     location: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,6 +23,8 @@ const CreatePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -33,74 +37,152 @@ const CreatePage = () => {
       navigate(`/page/${id}`);
     } catch (error) {
       console.error("Error creating business page:", error);
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">
-          Create Your Business Page
-        </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center p-6">
+      <div className="w-full max-w-lg">
+        <div className="text-center text-white mb-8">
+          <h1 className="text-4xl font-bold mb-3">
+            Create a Page for Your Business
+          </h1>
+          <p className="text-lg opacity-90">
+            Generate a simple business page in seconds.
+          </p>
+        </div>
+        <div className="bg-white rounded-xl shadow-2xl p-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="relative">
+              <input
+                type="text"
+                name="businessName"
+                value={formData.businessName}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="businessName"
-            placeholder="Business Name"
-            value={formData.businessName}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"
-            required
-          />
+              <label
+                className="absolute left-3 top-3 text-gray-500 transition-all 
+              peer-placeholder-shown:top-3 
+              peer-placeholder-shown:text-base 
+              peer-focus:-top-2 
+              peer-focus:text-sm 
+            peer-focus:text-blue-600 
+            bg-white px-1"
+              >
+                Business Name
+              </label>
+            </div>
 
-          <textarea
-            name="about"
-            placeholder="Short description about your business"
-            value={formData.about}
-            onChange={handleChange}
-            rows="3"
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"
-            required
-          />
+            <div className="relative">
+              <textarea
+                name="about"
+                value={formData.about}
+                onChange={handleChange}
+                placeholder=" "
+                rows="3"
+                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
 
-          <input
-            type="text"
-            name="services"
-            placeholder="Services (comma separated)"
-            value={formData.services}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"
-            required
-          />
+              <label
+                className="absolute left-3 top-3 text-gray-500 transition-all
+              peer-placeholder-shown:top-3
+              peer-placeholder-shown:text-base
+              peer-focus:-top-2
+              peer-focus:text-sm
+            peer-focus:text-blue-600
+            bg-white px-1"
+              >
+                About Your Business
+              </label>
+            </div>
 
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number (e.g. 2547XXXXXXXX)"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"
-            required
-          />
+            <div className="relative">
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
 
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-black"
-            required
-          />
+              <label
+                className="absolute left-3 top-3 text-gray-500 transition-all
+                peer-placeholder-shown:top-3
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+              peer-focus:text-blue-600
+              bg-white px-1"
+              >
+                Services (comma separated)
+              </label>
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
-          >
-            Generate My Page
-          </button>
-        </form>
+            <div className="relative">
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+
+              <label
+                className="absolute left-3 top-3 text-gray-500 transition-all
+                peer-placeholder-shown:top-3
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+              peer-focus:text-blue-600
+              bg-white px-1"
+              >
+                Phone Number (eg: 2547xxxxxxx)
+              </label>
+            </div>
+
+            <div className="relative">
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+
+              <label
+                className="absolute left-3 top-3 text-gray-500 transition-all
+                peer-placeholder-shown:top-3
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+              peer-focus:text-blue-600
+              bg-white px-1"
+              >
+                Location
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-indigo-700 text-white font-semibold py-3 rounded-md hover:bg-indigo-800 transition duration-200"
+            >
+              {loading ? "Generating..." : "Generate My Page"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
