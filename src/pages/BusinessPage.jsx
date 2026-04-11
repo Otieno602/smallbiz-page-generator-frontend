@@ -59,78 +59,118 @@ function BusinessPage() {
     <div className="min-h-screen bg-gray-50 flex justify-center px-4 py-10">
       <div className="w-full max-w-3xl bg-white shadow-xl rounded-2xl p-8 space-y-8">
         {/* Business Name */}
-      <div className="flex items-center gap-4">
+        <div className="text-center space-y-4">
 
-      <div className="w-14 h-14 bg-indigo-600 text-white flex items-center justify-center rounded-full text-xl font-bold">
-        {avatarLetter}
-      </div>
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">
-          {business.businessName}
-        </h1>
-      </div>
-    </div>
+          {/* Avatar */}
+          <div className="w-16 h-16 bg-indigo-600 text-white flex items-center justify-center rounded-full text-2xl font-bold mx-auto">
+            {avatarLetter}
+          </div>
 
-        <div className="flex gap-3 mt-3">
-          <button
-            onClick={copyLink}
-            className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-sm transition"
-          >
-            {copied ? "✓ Link Copied!" : "Share Page Link"}
-          </button>
+          {/* Business Name */}
+          <h1 className="text-3xl font-bold text-gray-900">
+            {business.businessName}
+          </h1>
+
+          {/* Tagline (About Preview) */}
+          <p className="text-gray-600 max-w-md mx-auto">
+            {business.about.length > 100
+            ? business.about.slice(0, 100) + "..."
+            : business.about}
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex justify-center gap-3 mt-4 flex-wrap">
+
+            <a href={`tel:${business.phone}`}>
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg transition">
+                Call
+              </button>
+            </a>
+
+            <a
+              href={`https://wa.me/${business.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg transition">
+                WhatsApp
+              </button>
+            </a>
+
+            <button
+              onClick={copyLink}
+              className="bg-gray-200 hover:bg-gray-300 px-5 py-2 rounded-lg transition"
+            >
+              {copied ? "✓ Copied!" : "Share"}
+            </button>
+
+          </div>
+
         </div>
 
         {/* About */}
         <div className="border-t pt-6">
           <h2 className="text-xl font-semibold mb-2">About</h2>
-          <p className="text-gray-600">{business.about}</p>
+          <p className="text-gray-600 leading-relaxed">{business.about}</p>
         </div>
 
         {/* Services */}
         <div className="border-t pt-6">
           <h2 className="text-xl font-semibold mb-3">Services</h2>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {business.services.map((service, index) => {
               const color = tagColors[index % tagColors.length];
               return (
-                <span
+                <div
                   key={index}
-                  className={`${color} px-3 py-1 rounded-full text-sm transition hover:-translate-y-0.5 cursor-default`}
+                  className={`p-4 rounded-xl shadow-sm border hover:shadow-md transition ${color}`}
                 >
-                  {service}
-                </span>
+                  <h3 className="font-semibold text-lg flex items-center gap-2"><span>•</span>{service}</h3>
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* Location */}
-        <div className="border-t pt-6">
-          <h2 className="text-xl font-semibold mb-1">Location</h2>
-          <p className="text-gray-600">{business.location}</p>
-        </div>
-
         {/* Contact */}
-        <div className="border-t pt-6">
-          <h2 className="text-xl font-semibold mb-2">Contact</h2>
+        <div className="border-t pt-8 text-center space-y-4">
 
-          <a
-            href={`tel:${business.phone}`}
-            className="text-indigo-600 font-medium block mb-3"
-          >
-            {business.phone}
-          </a>
+          {/* Heading */}
+          <h2 className="text-2xl font-bold text-gray-900">
+            Ready to work with us?
+          </h2>
 
-          <a
-            href={`https://wa.me/${business.phone}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg transition">
-              WhatsApp
-            </button>
-          </a>
+          {/* Subtext */}
+          <p className="text-gray-600">
+            Contact us today and let's bring your ideas to life.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex justify-center gap-4 flex-wrap mt-4">
+
+            <a href={`tel:${business.phone}`}>
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg transition font-medium">
+                📞 Call Now
+              </button>
+            </a>
+
+            <a
+              href={`https://wa.me/${business.phone}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition font-medium">
+                💬 WhatsApp
+              </button>
+            </a>
+
+          </div>
+
+           {/* Location */}
+          <p className="text-gray-600 flex items-center justify-center gap-2">
+            📍 {business.location}
+          </p>
 
         </div>
 
