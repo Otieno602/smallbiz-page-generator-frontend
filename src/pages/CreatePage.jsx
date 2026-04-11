@@ -13,6 +13,10 @@ const CreatePage = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const [services, setServices] = useState([]);
+  const [serviceInput, setServiceInput] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -21,20 +25,47 @@ const CreatePage = () => {
     });
   };
 
+  // Handle adding services dynamically
+  const handleServiceKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      const trimmed = serviceInput.trim();
+      if (trimmed && !services.includes(trimmed)) {
+        setServices([...services, trimmed]);
+      }
+      setServiceInput("");
+    }
+  };
+
+  const removeService = (index) => {
+    setServices(services.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
+    if (services.length === 0) {
+      alert("Please add at least one service.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/business",
-        formData,
-      );
+      const response = await axios.post("http://localhost:5000/api/business", {
+        ...formData,
+        services,
+      });
+
+      setLoading(false);
+      setSuccess(true);
 
       const id = response.data._id;
 
-      navigate(`/page/${id}`);
+      setTimeout(() => {
+        navigate(`/page/${id}`);
+      }, 2000);
+
     } catch (error) {
       console.error("Error creating business page:", error);
       setLoading(false);
@@ -45,15 +76,17 @@ const CreatePage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="text-center text-white mb-8">
-          <h1 className="text-4xl font-bold mb-3">
-            Create a Page for Your Business
-          </h1>
-          <p className="text-lg opacity-90">
-            Generate a simple business page in seconds.
-          </p>
+          <h1 className="text-4xl font-bold mb-3">Create a Page for Your Business</h1>
+          <p className="text-lg opacity-90">Generate a simple business page in seconds.</p>
         </div>
-        <div className="bg-white rounded-xl shadow-2xl p-8">
+        <div className="bg-white rounded-xl shadow-2xl p-8 space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
+            {success && (
+              <div className="bg-green-100 text-green-700 p-3 rounded-md text-center animate-pulse">
+                ✅ Business page created successfully! Redirecting...
+              </div>
+            )}
+            {/* Business Name */}
             <div className="relative">
               <input
                 type="text"
@@ -61,47 +94,87 @@ const CreatePage = () => {
                 value={formData.businessName}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-
-              <label
-                className="absolute left-3 top-3 text-gray-500 transition-all 
-              peer-placeholder-shown:top-3 
-              peer-placeholder-shown:text-base 
-              peer-focus:-top-2 
-              peer-focus:text-sm 
-            peer-focus:text-blue-600 
-            bg-white px-1"
+              <label className="absolute left-3 top-2 text-gray-500 transition-all
+                peer-placeholder-shown:top-5
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+                peer-focus:text-blue-600
+                bg-white px-1"
               >
                 Business Name
               </label>
             </div>
 
+            {/* About */}
             <div className="relative">
               <textarea
                 name="about"
                 value={formData.about}
                 onChange={handleChange}
                 placeholder=" "
-                rows="3"
-                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows={3}
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-
-              <label
-                className="absolute left-3 top-3 text-gray-500 transition-all
-              peer-placeholder-shown:top-3
-              peer-placeholder-shown:text-base
-              peer-focus:-top-2
-              peer-focus:text-sm
-            peer-focus:text-blue-600
-            bg-white px-1"
+              <label className="absolute left-3 top-2 text-gray-500 transition-all
+                peer-placeholder-shown:top-5
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+                peer-focus:text-blue-600
+                bg-white px-1"
               >
-                About Your Business
+                Short description about your business
               </label>
             </div>
 
+            {/* Services */}
+            <div className="relative">
+              <input
+                type="text"
+                name="services"
+                value={serviceInput}
+                onChange={(e) => setServiceInput(e.target.value)}
+                onKeyDown={handleServiceKeyDown}
+                placeholder=" "
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <label className="absolute left-3 top-2 text-gray-500 transition-all
+                peer-placeholder-shown:top-5
+                peer-placeholder-shown:text-base
+                peer-focus:-top-2
+                peer-focus:text-sm
+                peer-focus:text-blue-600
+                bg-white px-1"
+              >
+                Services (press comma or enter)
+              </label>
+
+              {/* Display tags */}
+              <div className="flex flex-wrap gap-2 mt-2">
+                {services.map((service, index) => (
+                  <span
+                    key={index}
+                    className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full flex items-center gap-2 text-sm transition hover:bg-indigo-200 cursor-default"
+                  >
+                    {service}
+                    <button
+                      type="button"
+                      onClick={() => removeService(index)}
+                      className="text-indigo-600 hover:text-red-500 font-bold"
+                    >
+                      ×
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Phone */}
             <div className="relative">
               <input
                 type="text"
@@ -109,66 +182,39 @@ const CreatePage = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-
-              <label
-                className="absolute left-3 top-3 text-gray-500 transition-all
-                peer-placeholder-shown:top-3
+              <label className="absolute left-3 top-2 text-gray-500 transition-all
+                peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
                 peer-focus:text-sm
-              peer-focus:text-blue-600
-              bg-white px-1"
+                peer-focus:text-blue-600
+                bg-white px-1"
               >
-                Services (comma separated)
+                Phone Number (e.g. 2547XXXXXXXX)
               </label>
             </div>
 
+            {/* Location */}
             <div className="relative">
               <input
                 type="text"
-                name="phone"
-                value={formData.phone}
+                name="location"
+                value={formData.location}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-
-              <label
-                className="absolute left-3 top-3 text-gray-500 transition-all
-                peer-placeholder-shown:top-3
+              <label className="absolute left-3 top-2 text-gray-500 transition-all
+                peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
                 peer-focus:text-sm
-              peer-focus:text-blue-600
-              bg-white px-1"
-              >
-                Phone Number (eg: 2547xxxxxxx)
-              </label>
-            </div>
-
-            <div className="relative">
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-
-              <label
-                className="absolute left-3 top-3 text-gray-500 transition-all
-                peer-placeholder-shown:top-3
-                peer-placeholder-shown:text-base
-                peer-focus:-top-2
-                peer-focus:text-sm
-              peer-focus:text-blue-600
-              bg-white px-1"
+                peer-focus:text-blue-600
+                bg-white px-1"
               >
                 Location
               </label>
@@ -177,9 +223,9 @@ const CreatePage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-700 text-white font-semibold py-3 rounded-md hover:bg-indigo-800 transition duration-200"
+              className="w-full bg-indigo-700 text-white font-semibold py-3 rounded-md hover:bg-indigo-800 transition duration-200 disabled:opacity-60"
             >
-              {loading ? "Generating..." : "Generate My Page"}
+              {loading ? "Creating Page..." : "Generate My Page"}
             </button>
           </form>
         </div>
