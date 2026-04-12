@@ -174,6 +174,10 @@ function BusinessPage() {
 
         </div>
 
+        <p className="text-center text-gray-500 text-sm mt-6">
+          Powered by RealersTech
+        </p>
+
       </div>
     </div>
   );

@@ -76,8 +76,13 @@ const CreatePage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center p-6">
       <div className="w-full max-w-lg">
         <div className="text-center text-white mb-8">
-          <h1 className="text-4xl font-bold mb-3">Create a Page for Your Business</h1>
-          <p className="text-lg opacity-90">Generate a simple business page in seconds.</p>
+          <h1 className="text-4xl font-bold mb-3">
+            RealersTech Pages
+          </h1>
+
+          <p className="text-lg opacity-90">
+            Create a simple business page in seconds.
+          </p>
         </div>
         <div className="bg-white rounded-xl shadow-2xl p-8 space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,7 +102,7 @@ const CreatePage = () => {
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-              <label className="absolute left-3 top-2 text-gray-500 transition-all
+              <label className="absolute left-3 -top-2 text-sm text-gray-600 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
@@ -120,7 +125,7 @@ const CreatePage = () => {
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-              <label className="absolute left-3 top-2 text-gray-500 transition-all
+              <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
@@ -128,7 +133,7 @@ const CreatePage = () => {
                 peer-focus:text-blue-600
                 bg-white px-1"
               >
-                Short description about your business
+                Describe your business
               </label>
             </div>
 
@@ -143,7 +148,7 @@ const CreatePage = () => {
                 placeholder=" "
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <label className="absolute left-3 top-2 text-gray-500 transition-all
+              <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
@@ -185,7 +190,7 @@ const CreatePage = () => {
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-              <label className="absolute left-3 top-2 text-gray-500 transition-all
+              <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
@@ -208,7 +213,7 @@ const CreatePage = () => {
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-              <label className="absolute left-3 top-2 text-gray-500 transition-all
+              <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
