@@ -12,7 +12,7 @@ function BusinessPage() {
     const fetchBusiness = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/business/${id}`,
+          `https://realerstech-pages-backend.onrender.com/${id}`,
         );
 
         setBusiness(response.data);
