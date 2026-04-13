@@ -52,7 +52,7 @@ const CreatePage = () => {
     }
 
     try {
-      const response = await axios.post("https://realerstech-pages-backend.onrender.com", {
+      const response = await axios.post("https://realerstech-pages-backend.onrender.com/api/business", {
         ...formData,
         services,
       });
