@@ -69,7 +69,11 @@ const CreatePage = () => {
     e.preventDefault();
     setLoading(true);
 
-    if (services.length === 0) {
+    if (serviceInput.trim() !== "") {
+      setServices([...services, serviceInput.trim()]);
+    }
+
+    if (services.length === 0 && serviceInput.trim() === "") {
       alert("Please add at least one service.");
       setLoading(false);
       return;
@@ -123,7 +127,7 @@ const CreatePage = () => {
                 value={formData.businessName}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-600 transition-all
@@ -146,7 +150,7 @@ const CreatePage = () => {
                 onChange={handleChange}
                 placeholder=" "
                 rows={3}
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
@@ -170,7 +174,7 @@ const CreatePage = () => {
                 onChange={handleServiceChange}
                 onKeyDown={handleServiceKeyDown}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
@@ -180,14 +184,14 @@ const CreatePage = () => {
                 peer-focus:text-blue-600
                 bg-white px-1"
               >
-                Services (press comma or enter)
+                Services (press comma, add or enter)
               </label>
 
               {/* Add Button */}
               <button
                 type="button"
                 onClick={addService}
-                className="absolute right-2 top-2 bg-indigo-600 text-white px-3 py-1 rounded-md text-sm"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-600 text-white px-3 py-1 rounded-md text-sm"
               >
                 Add
               </button>
@@ -220,7 +224,7 @@ const CreatePage = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
@@ -243,7 +247,7 @@ const CreatePage = () => {
                 value={formData.location}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
