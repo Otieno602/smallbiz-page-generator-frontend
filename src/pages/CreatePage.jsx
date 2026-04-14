@@ -166,28 +166,31 @@ const CreatePage = () => {
             </div>
 
             {/* Services */}
-            <div className="relative">
-              <input
-                type="text"
-                name="services"
-                value={serviceInput}
-                onChange={handleServiceChange}
-                onKeyDown={handleServiceKeyDown}
-                placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <div>
+
+              {/* Input + Button Wrapper */}
+              <div className="relative">
+                <input
+                  type="text"
+                  value={serviceInput}
+                  onChange={handleServiceChange}
+                  onKeyDown={handleServiceKeyDown}
+                  placeholder=" "
+                  className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
                 peer-placeholder-shown:text-base
                 peer-focus:-top-2
                 peer-focus:text-sm
-                peer-focus:text-blue-600
-                bg-white px-1"
+              peer-focus:text-blue-600
+              bg-white px-1"
               >
-                Services
+                Services (comma, enter or Add)
               </label>
 
-              {/* Add Button */}
+              {/* Add Button (now stable) */}
               <button
                 type="button"
                 onClick={addService}
@@ -195,26 +198,28 @@ const CreatePage = () => {
               >
                 Add
               </button>
-
-              {/* Display tags */}
-              <div className="flex flex-wrap gap-2 mt-2">
-                {services.map((service, index) => (
-                  <span
-                    key={index}
-                    className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full flex items-center gap-2 text-sm transition hover:bg-indigo-200 cursor-default"
-                  >
-                    {service}
-                    <button
-                      type="button"
-                      onClick={() => removeService(index)}
-                      className="text-indigo-600 hover:text-red-500 font-bold"
-                    >
-                      ×
-                    </button>
-                  </span>
-                ))}
-              </div>
             </div>
+
+            {/* Tags OUTSIDE */}
+            <div className="flex flex-wrap gap-2 mt-3">
+              {services.map((service, index) => (
+              <span
+                key={index}
+                className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full flex items-center gap-2 text-sm"
+              >
+                {service}
+                <button
+                  type="button"
+                  onClick={() => removeService(index)}
+                  className="text-indigo-600 hover:text-red-500 font-bold"
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+          </div>
+
+        </div>
 
             {/* Phone */}
             <div className="relative">
