@@ -174,7 +174,7 @@ const CreatePage = () => {
                 onChange={handleServiceChange}
                 onKeyDown={handleServiceKeyDown}
                 placeholder=" "
-                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 pr-20 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <label className="absolute left-3 -top-2 text-sm text-gray-500 transition-all
                 peer-placeholder-shown:top-5
