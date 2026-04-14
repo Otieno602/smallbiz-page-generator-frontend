@@ -109,7 +109,7 @@ const CreatePage = () => {
           </h1>
 
           <p className="text-lg opacity-90">
-            Create a simple business page in seconds.
+            Turn your business into a mini website in seconds.
           </p>
         </div>
         <div className="bg-white rounded-xl shadow-2xl p-8 space-y-4">
