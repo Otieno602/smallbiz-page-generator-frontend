@@ -184,7 +184,7 @@ const CreatePage = () => {
                 peer-focus:text-blue-600
                 bg-white px-1"
               >
-                Services (press comma, add or enter)
+                Services
               </label>
 
               {/* Add Button */}
