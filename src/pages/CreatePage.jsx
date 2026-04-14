@@ -37,6 +37,30 @@ const CreatePage = () => {
     }
   };
 
+  const handleServiceChange = (e) => {
+    const value = e.target.value;
+
+    if (value.includes(",")) {
+      const parts = value.split(",");
+      const newServices = parts
+        .map((s) => s.trim())
+        .filter((s) => s && !services.includes(s));
+
+      setServices([...services, ...newServices]);
+      setServiceInput("");
+    } else {
+      setServiceInput(value);
+    }
+  };
+
+  const addService = () => {
+    const trimmed = serviceInput.trim();
+      if (trimmed && !services.includes(trimmed)) {
+      setServices([...services, trimmed]);
+      setServiceInput("");
+    }
+  };
+
   const removeService = (index) => {
     setServices(services.filter((_, i) => i !== index));
   };
@@ -143,7 +167,7 @@ const CreatePage = () => {
                 type="text"
                 name="services"
                 value={serviceInput}
-                onChange={(e) => setServiceInput(e.target.value)}
+                onChange={handleServiceChange}
                 onKeyDown={handleServiceKeyDown}
                 placeholder=" "
                 className="peer w-full border border-gray-300 rounded-md p-3 pt-5 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -158,6 +182,15 @@ const CreatePage = () => {
               >
                 Services (press comma or enter)
               </label>
+
+              {/* Add Button */}
+              <button
+                type="button"
+                onClick={addService}
+                className="absolute right-2 top-2 bg-indigo-600 text-white px-3 py-1 rounded-md text-sm"
+              >
+                Add
+              </button>
 
               {/* Display tags */}
               <div className="flex flex-wrap gap-2 mt-2">
